@@ -1,6 +1,6 @@
 # The 50 selected repeat stations
 This folder contains information about the selection process for the new Brazilian repeat station network. 
-There are Folium maps used in the selection process and csv files with the 50 repeat stations.
+There are Folium maps used in the selection process and csv files.
 
 ## Map: 07a_selection_process_repeat_stations
 This map was the one used to select the stations. More details in the text.

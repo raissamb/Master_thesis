@@ -62,11 +62,11 @@ folium_file_g4: Path = Path(mm.output_05a_code_folium_file_g4)
 
 # Save figures and files
 output_folder: Path = Path(mm.path_pipeline_07_selection_process)
-chosen_rs: Path = Path(mm.output_7a_code_selected_rs_folium)
+chosen_rs: Path = Path(mm.output_7b_code_selected_rs_folium)
 
 # Folium maps
 mapa0 = "../02_pipeline/07_repeat_stations_selection_process/"\
-    "07a_selection_process_repeat_stations_map.html"
+    "07b_selection_process_repeat_stations_map.html"
 
 
 # read folium files

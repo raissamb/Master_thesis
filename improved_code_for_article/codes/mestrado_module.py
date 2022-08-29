@@ -7,18 +7,21 @@ This is a temporary script file.
 
 # MODULES USED IN THIS MODULE
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-# VARIABLES
+# --------------------------- VARIABLES ---------------------------------------
 # Observatories location according to Intermagnet in decimal degrees
 TTB_lat = -1.205
 TTB_lon = -48.513
 VSS_lat = -22.400
 VSS_lon = -43.650
 
+# ---------------------------- SHAPEFILES -------------------------------------
+brazil_shapefile = "BR_UF_2020.shp"
+south_america_shapefile = "South_America.shp"
 
-# DATA FOLDER PATHS
+# --------------------------- DATA FOLDER PATHS -------------------------------
 path_00_data_manual = "../00_data/manual/"
 path_00_data_raw_data = "../00_data/raw_data/"
 path_00_data_brazil_shapefile = "../00_data/shapefiles_data/brazil/"
@@ -26,7 +29,7 @@ path_00_data_south_america_shapefile = "../00_data/shapefiles_data/" \
     "south_america/"
 
 
-# PIPELINE FOLDER PATHS
+# --------------------------- PIPELINE FOLDER PATHS ---------------------------
 path_pipeline_01_data_processing = "../02_pipeline/01_data_processing/"
 
 path_pipeline_02_icgem_file = "../02_pipeline/02_icgem_input_file_creation/"
@@ -35,44 +38,70 @@ path_pipeline_03_rs_database_creation = "../02_pipeline/" \
     "03_repeat_stations_database_creation/"
 
 path_pipeline_04_igrf_calc = "../02_pipeline/04_igrf_calculation/"
-path_pipeline_04_igrf_calc_figures = "../02_pipeline/04_igrf_calculation/" \
-    "figures_comparison_x_y_z"
 
-path_pipeline_05_rank_n_occupations = "../02_pipeline/" \
-    "05_rank_repeat_stations_n_occupations/"
 
-path_pipeline_06a_plot_temporal_series_g1 = "../02_pipeline/"\
-    "06_rank_repeat_stations_temporal_series/temp_series_g1"
-path_pipeline_06b_plot_temporal_series_g2 = "../02_pipeline/"\
-    "06_rank_repeat_stations_temporal_series/temp_series_g2"
-path_pipeline_06c_plot_temporal_series_g3 = "../02_pipeline/"\
-    "06_rank_repeat_stations_temporal_series/temp_series_g3"
-path_pipeline_06d_plot_temporal_series_g4 = "../02_pipeline/"\
-    "06_rank_repeat_stations_temporal_series/temp_series_g4"
+path_pipeline_05_selection_process = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"
+path_pipeline_05a_selection_process_plot_distrib = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/plot_distribution"
+path_pipeline_05b_selection_process_ocp_groups = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/occupation_groups"
 
-path_pipeline_07_selection_process = "../02_pipeline/"\
-    "07_repeat_stations_selection_process/"
+path_pipeline_05c_plot_temporal_series_g1 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_temporal_series_by_occupation_groups/temp_series_g1"
+path_pipeline_05c_plot_temporal_series_g2 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_temporal_series_by_occupation_groups/temp_series_g2"
+path_pipeline_05c_plot_temporal_series_g3 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_temporal_series_by_occupation_groups/temp_series_g3"
+path_pipeline_05c_plot_temporal_series_g4 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_temporal_series_by_occupation_groups/temp_series_g4"
+path_pipeline_05c_plot_temporal_series_g5 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_temporal_series_by_occupation_groups/temp_series_g5"
+path_pipeline_05c_plot_temporal_series_g6 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_temporal_series_by_occupation_groups/temp_series_g6"
+path_pipeline_05c_plot_temporal_series_g7 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_temporal_series_by_occupation_groups/temp_series_g7"
+
+path_pipeline_05d_rmse_g1 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_rmse_by_occupation_groups/rmse_g1"
+path_pipeline_05d_rmse_g2 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_rmse_by_occupation_groups/rmse_g2"
+path_pipeline_05d_rmse_g3 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_rmse_by_occupation_groups/rmse_g3"
+path_pipeline_05d_rmse_g4 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_rmse_by_occupation_groups/rmse_g4"
+path_pipeline_05d_rmse_g5 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_rmse_by_occupation_groups/rmse_g5"
+path_pipeline_05d_rmse_g6 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_rmse_by_occupation_groups/rmse_g6"
+path_pipeline_05d_rmse_g7 = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/"\
+    "plot_rmse_by_occupation_groups/rmse_g7"
+
+path_pipeline_05e_selection = "../02_pipeline/"\
+    "05_repeat_stations_selection_process/select_repeat_stations"
+
 
 path_pipeline_08_model_one = "../02_pipeline/08_rs_network_model_one/"
 path_pipeline_09_model_two = "../02_pipeline/09_rs_network_model_two/"
 path_pipeline_10_model_three = "../02_pipeline/10_rs_network_model_three/"
 path_pipeline_11_quick_vis = "../02_pipeline/quick_visualization/"
 
-path_pipeline_extra_01a_plot_stats = "../02_pipeline/extra_01_plots/rs_statistics/"
-path_pipeline_extra_01b_plot_maps = "../02_pipeline/extra_01_plots/rs_maps/"
 
-
-# path_pipeline_6a_plot_rs = "../02_pipeline/06_plot_info/6a_plot_repeat_stations/"
-# path_pipeline_6b_plot_rs_igrf = "../02_pipeline/06_plot_info/6b_plot_repeat_stations_igrf/"
-# path_pipeline_6c_plot_rs_stats = "../02_pipeline/06_plot_info/6c_plot_repeat_stations_stats/"
-# path_pipeline_6d_plot_rs_interactive = "../02_pipeline/06_plot_info/6d_plot_repeat_stations_interactive/"
-# path_pipeline_07_calculate_reference_distances = "../02_pipeline/07_calculate_reference_distances/"
-
-
-# FILES
-brazil_shapefile = "BR_UF_2020.shp"
-south_america_shapefile = "South_America.shp"
-
+# --------------------------- OUTPUT FILES ------------------------------------
 output_01a_code_clean_data = "01a_pre_processed_repeat_station_data.csv"
 output_01b_code_processed_data = "01b_processed_repeat_stations_data.csv"
 
@@ -86,61 +115,64 @@ output_04b_geomag_file = "04b_igrf_output_alt_geoid.txt"
 output_04c_code_igrf_database = "04c_igrf_database_alt_geoid.csv"
 output_04d_code_rs_igrf_database = \
     "04d_repeat_stations_igrf_database_alt_geoid.csv"
-output_04d_code_error_database = \
-    "04d_repeat_stations_igrf_errors_alt_geoid.csv"
-output_04e_code_complete_rs_igrf_database = \
-    "04e_repeat_stations_igrf_rmse_database_alt_geoid.csv"
 
-output_05a_code_database_g1 = "05a_rs_ocp_database_g1.csv"
-output_05a_code_database_g2 = "05a_rs_ocp_database_g2.csv"
-output_05a_code_database_g3 = "05a_rs_ocp_database_g3.csv"
-output_05a_code_database_g4 = "05a_rs_ocp_database_g4.csv"
-output_05a_code_database_g5 = "05a_rs_ocp_database_g5.csv"
-output_05a_code_database_g6 = "05a_rs_ocp_database_g6.csv"
-output_05a_code_folium_file_g1 = "05a_folium_plot_g1.csv"
-output_05a_code_folium_file_g2 = "05a_folium_plot_g2.csv"
-output_05a_code_folium_file_g3 = "05a_folium_plot_g3.csv"
-output_05a_code_folium_file_g4 = "05a_folium_plot_g4.csv"
-output_05a_code_folium_file_g5 = "05a_folium_plot_g5.csv"
-output_05a_code_folium_file_g6 = "05a_folium_plot_g6.csv"
+# Distribution files
+output_05a_code_fig_ocp_distrib_sts = \
+    "05a_distribution_occupations_station.png"
+output_05a_code_fig_sts_distrib_region = \
+    "05a_distribution_region_station.png"
+output_05a_code_fig_ocp_distrib_region = \
+    "05a_distribution_region_occupation.png"
 
-output_07a_code_fig_sts_distrib_region = \
-    "07a_distribution_region_station.png"
-output_07a_code_fig_ocp_distrib_region = \
-    "07a_distribution_region_occupation.png"
+output_05a_code_fig_sts_distrib_states_n = \
+    "05a_distribution_states_north_station.png"
+output_05a_code_fig_sts_distrib_states_ne = \
+    "05a_distribution_states_northeast_station.png"
+output_05a_code_fig_sts_distrib_states_co = \
+    "05a_distribution_states_centroeste_station.png"
+output_05a_code_fig_sts_distrib_states_se = \
+    "05a_distribution_states_southeast_station.png"
+output_05a_code_fig_sts_distrib_states_s = \
+    "05a_distribution_states_south_station.png"
 
-output_07a_code_fig_sts_distrib_states_n = \
-    "07a_distribution_states_north_station.png"
-output_07a_code_fig_sts_distrib_states_ne = \
-    "07a_distribution_states_northeast_station.png"
-output_07a_code_fig_sts_distrib_states_co = \
-    "07a_distribution_states_centroeste_station.png"
-output_07a_code_fig_sts_distrib_states_se = \
-    "07a_distribution_states_southeast_station.png"
-output_07a_code_fig_sts_distrib_states_s = \
-    "07a_distribution_states_south_station.png"
+output_05a_code_fig_ocp_distrib_states_n = \
+    "05a_distribution_states_north_occupation.png"
+output_05a_code_fig_ocp_distrib_states_ne = \
+    "05a_distribution_states_northeast_occupation.png"
+output_05a_code_fig_ocp_distrib_states_co = \
+    "05a_distribution_states_centroeste_occupation.png"
+output_05a_code_fig_ocp_distrib_states_se = \
+    "05a_distribution_states_southeast_occupation.png"
+output_05a_code_fig_ocp_distrib_states_s = \
+    "05a_distribution_states_south_occupation.png"
 
-output_07a_code_fig_ocp_distrib_states_n = \
-    "07a_distribution_states_north_occupation.png"
-output_07a_code_fig_ocp_distrib_states_ne = \
-    "07a_distribution_states_northeast_occupation.png"
-output_07a_code_fig_ocp_distrib_states_co = \
-    "07a_distribution_states_centroeste_occupation.png"
-output_07a_code_fig_ocp_distrib_states_se = \
-    "07a_distribution_states_southeast_occupation.png"
-output_07a_code_fig_ocp_distrib_states_s = \
-    "07a_distribution_states_south_occupation.png"
+output_05a_code_fig_geo_distrib = "05a_distribution_geographical_map.png"
+
+# Occupation groups files
+output_05b_code_database_g1 = "05b_rs_ocp_database_g1.csv"
+output_05b_code_database_g2 = "05b_rs_ocp_database_g2.csv"
+output_05b_code_database_g3 = "05b_rs_ocp_database_g3.csv"
+output_05b_code_database_g4 = "05b_rs_ocp_database_g4.csv"
+output_05b_code_database_g5 = "05b_rs_ocp_database_g5.csv"
+output_05b_code_database_g6 = "05b_rs_ocp_database_g6.csv"
+output_05b_code_database_g7 = "05b_rs_ocp_database_g7.csv"
+output_05b_code_folium_file_g1 = "05b_folium_plot_g1.csv"
+output_05b_code_folium_file_g2 = "05b_folium_plot_g2.csv"
+output_05b_code_folium_file_g3 = "05b_folium_plot_g3.csv"
+output_05b_code_folium_file_g4 = "05b_folium_plot_g4.csv"
+output_05b_code_folium_file_g5 = "05b_folium_plot_g5.csv"
+output_05b_code_folium_file_g6 = "05b_folium_plot_g6.csv"
+output_05b_code_folium_file_g7 = "05b_folium_plot_g7.csv"
+
+output_05e_code_selected_rs_database= "05e_selected_repeat_stations_database.csv"
 
 
-output_7b_code_selected_rs_folium = \
-    "7a_selected_repeat_stations_folium_file.csv"
 #output_7b_code_selected_rs_db = "7b_selected_repeat_stations_database.csv"
 #output_7b_code_distance_file = "7b_selected_repeat_stations_distances.csv"
 #output_7b_code_selected_rs_table = "7b_selected_repeat_stations_database_table.csv"
 
 
-# FUNCTIONS
-
+# ---------------------------- FUNCTIONS --------------------------------------
 def calculate_x_comp_mag_field(total_field_nT, inc_ddegreee, dec_ddegree):
     """
     This function calculates the X component of the magnetic field.
@@ -996,3 +1028,68 @@ def occupation_distribution_states_region(data, labels, colors, output_folder,
     plt.title(f"Occupation distribution by states ({region})", pad=20)
     plt.savefig(output_folder / figure_name, dpi=300)
     plt.close(fig)
+
+
+def calculate_rmse_by_group(station_list, df_group, comp_igrf, comp_rs):
+    rmse_comp = []
+    df_copy = df_group.copy()
+
+    for i in station_list:
+        station_name = i
+        aux_df = df_copy[df_copy["Code"] == station_name]
+
+        # Calculate RMSE
+        rmse_calc = rmse(aux_df[comp_igrf], aux_df[comp_rs])
+        # append the result of each loop to the array
+        rmse_comp.append(rmse_calc)
+
+    return rmse_comp
+
+
+def plot_rmse_by_group_fhdi(rmse_df, column, component, unit, group,
+                            output_folder, figure_name):
+    # Figure style
+    sns.set_style("darkgrid")
+
+    df_aux = rmse_df.copy()
+    rmse = df_aux[column]
+    station_name = df_aux["Code"]
+    # Figure
+    fig, ax = plt.subplots(figsize=(12, 7))
+    ax.scatter(station_name, rmse, marker="o")
+    ax.set_xlabel("Station name", fontsize=14)
+    ax.set_ylabel(f"{unit}", fontsize=14)
+    ax.set_title(f"RMSE Value for {component}: Group {group}", fontsize=16)
+    plt.legend(["Original value"])
+    plt.xticks(rotation=90)
+    plt.savefig(output_folder / figure_name,
+                dpi=300,
+                bbox_inches="tight")
+    plt.grid(True)
+    plt.close()
+
+
+def plot_rmse_by_group_xyz(rmse_df, column_orig, column_calc, component,
+                           unit, group,
+                           output_folder, figure_name):
+    # Figure style
+    sns.set_style("darkgrid")
+
+    df_aux = rmse_df.copy()
+    rmse_orig = df_aux[column_orig]
+    rmse_calc = df_aux[column_calc]
+    station_name = df_aux["Code"]
+    # Figure
+    fig, ax = plt.subplots(figsize=(12, 7))
+    ax.scatter(station_name, rmse_orig, marker="o")
+    ax.scatter(station_name, rmse_calc, marker="+")
+    ax.set_xlabel("Station name", fontsize=14)
+    ax.set_ylabel(f"{unit}", fontsize=14)
+    ax.set_title(f"RMSE Value for {component}: Group {group}", fontsize=16)
+    plt.legend(["Original value", "Calculated value"])
+    plt.xticks(rotation=90)
+    plt.savefig(output_folder / figure_name,
+                dpi=300,
+                bbox_inches="tight")
+    plt.grid(True)
+    plt.close()

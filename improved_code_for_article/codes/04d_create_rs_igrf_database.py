@@ -32,7 +32,6 @@ input_igrf_file: Path = Path(mm.output_04c_code_igrf_database)
 # Output
 output_folder: Path = Path(mm.path_pipeline_04_igrf_calc)
 output_file: Path = Path(mm.output_04d_code_rs_igrf_database)
-err_db: Path = Path(mm.output_04d_code_error_database)
 
 
 # Load station and IGRF data with Pandas
